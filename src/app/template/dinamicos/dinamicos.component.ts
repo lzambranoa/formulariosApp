@@ -19,6 +19,8 @@ interface Favorito {
 })
 export class DinamicosComponent {
 
+  nuevoJuego: string = '';
+
   @ViewChild('miFormulario') miFormulario!: NgForm
 
   persona: Persona = {
@@ -30,12 +32,26 @@ export class DinamicosComponent {
 
   }
 
+  agregarJuego() {
+    const nuevoFavorito: Favorito = {
+      id: this.persona.favoritos.length + 1,
+      nombre: this.nuevoJuego
+    }
+
+    this.persona.favoritos.push({...nuevoFavorito});
+    this.nuevoJuego = ''
+  }
+
   nombreValido(): boolean {
      return this.miFormulario?.controls['nombre']?.errors != null
   }
 
   guardar(){
     console.log('Formulario posteado')
+  }
+
+  eliminar(index:number){
+    this.persona.favoritos.splice( index, 1 )
   }
 
 }
