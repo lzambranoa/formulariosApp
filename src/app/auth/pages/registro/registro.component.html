@@ -29,7 +29,7 @@
                             formControlName="email"
                             placeholder="Email del usuario">
                     <span class="form-text text-danger" 
-                        *ngIf="campoValido('email')">El correo es obligatorio</span>
+                        *ngIf="campoValido('email')">{{ emailErrorMsg }}</span>
                 </div>
             </div>
 
@@ -77,6 +77,7 @@
             <div class="row">
                 <div class="col">
                     <button class="btn btn-primary float-end"
+                    [disabled]="miFormulario.invalid"
                             type="submit">
                         Guardar
                     </button>
@@ -88,6 +89,8 @@
 </div>
 
 <h2>Form Valid: {{ miFormulario.valid }}</h2>
+<h2>Form Status: {{ miFormulario.status }}</h2>
+<h2>Form Pending: {{ miFormulario.pending }}</h2>
 <h2>Form Errors</h2>
 <pre>{{ miFormulario.errors | json }}</pre>
 
